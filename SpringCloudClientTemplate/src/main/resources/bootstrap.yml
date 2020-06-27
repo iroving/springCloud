@@ -1,0 +1,63 @@
+server:
+  port: 8007
+  servlet:
+    context-path: /SpringCloudClient
+
+spring:
+  application:
+    name: SpringCloudClient
+  cloud:
+#    zookeeper:
+#      connect-string: 192.168.50.59:2181
+    nacos:
+      discovery:
+        server-addr: 192.168.50.59:8848
+      config:
+        server-addr: 192.168.50.59:8848
+        file-extension: yaml
+    sentinel:
+      transport:
+        #这货是一个监控页面，开不开无所谓的
+        dashboard: 192.168.50.59:8080
+        port: 8719  #默认8719，假如被占用了会自动从8719开始依次+1扫描。直至找到未被占用的端口，这个应该是客户端的端口，sentinel客户端
+#      datasource:
+#        ds1:
+#          nacos:
+#            serverAddr: 192.168.50.59:8848
+#            dataId: ${spring.application.name}
+#            groupId: DEFAULT_GROUP
+#            ruleType: FLOW
+#            dataType: json
+#这边的数据源配置放到了配置中心
+#  datasource:
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    driver-class-name: org.gjt.mm.mysql.Driver
+#    url: jdbc:mysql://192.168.50.59:3306/spingcloud?useUnicode=true&characterEncoding=utf-8&useSSL=false
+#    username: root
+#    password: 21231121
+
+#配置中心的内容是
+#spring:
+#  datasource:
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    driver-class-name: org.gjt.mm.mysql.Driver
+#    url: jdbc:mysql://192.168.50.59:3306/spingcloud?useUnicode=true&characterEncoding=utf-8&useSSL=false
+#    username: root
+#    password: 21231121
+
+#mybatis:
+#  mapperLocations: classpath:mapper/*.xml
+#  type-aliases-package: com.atguigu.springcloud.entities
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+#这个是客户端使用sentinel的方式
+feign:
+  sentinel:
+    enabled: true # 激活Sentinel对Feign的支持
+
+#这边将用到的服务配置出来，不要在代码上写死
+service-url:
+  springboot-provider-service: http://SpringCloudProvider

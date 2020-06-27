@@ -26,6 +26,8 @@
       <module>cloud-provider-nacos-payment8007</module>
       <module>cloudalibaba-config-nacos-client3377</module>
       <module>cloud-nacosRuleStore-service8008</module>
+      <module>SpringCloudClientTemplate</module>
+    <module>SpringCloudServiceTemplate</module>
   </modules>
   <packaging>pom</packaging>
 

@@ -1,0 +1,44 @@
+server:
+  port: 8009
+#  servlet:
+#    context-path: /nacos-payment-provider
+
+spring:
+  application:
+    name: SpringCloudProvider
+  cloud:
+#    zookeeper:
+#      connect-string: 192.168.50.59:2181
+    nacos:
+      discovery:
+        server-addr: 192.168.50.59:8848
+      config:
+        server-addr: 192.168.50.59:8848
+        file-extension: yaml
+    sentinel:
+      transport:
+        dashboard: 192.168.50.59:8080
+        port: 8719  #默认8719，假如被占用了会自动从8719开始依次+1扫描。直至找到未被占用的端口
+      datasource:
+        ds1:
+          nacos:
+            serverAddr: 192.168.50.59:8848
+            dataId: ${spring.application.name}
+            groupId: DEFAULT_GROUP
+            ruleType: FLOW
+            dataType: json
+#  datasource:
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    driver-class-name: org.gjt.mm.mysql.Driver
+#    url: jdbc:mysql://192.168.50.59:3306/spingcloud?useUnicode=true&characterEncoding=utf-8&useSSL=false
+#    username: root
+#    password: 21231121
+
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
+  type-aliases-package: com.atguigu.springcloud.entities
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
