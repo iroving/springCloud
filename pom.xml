@@ -23,6 +23,9 @@
     <module>cloud-consumer-feign-hystrix-order8000</module>
     <module>cloud-consumer-hystrix-dashboard9001</module>
       <module>cloud-gateway-gateway9527</module>
+      <module>cloud-provider-nacos-payment8007</module>
+      <module>cloudalibaba-config-nacos-client3377</module>
+      <module>cloud-nacosRuleStore-service8008</module>
   </modules>
   <packaging>pom</packaging>
 
